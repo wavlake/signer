@@ -9,7 +9,7 @@ class StorageItem {
   final String value;
 }
 
-class State with ChangeNotifier {
+class AppState with ChangeNotifier {
   final _keyGenerator = KeyApi();
   final _nip19 = Nip19();
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
