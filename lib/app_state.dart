@@ -31,12 +31,17 @@ class AppState with ChangeNotifier {
     var nsecKey = _nip19.nsecEncode(privateHex);
     var npubKey = _nip19.npubEncode(publicHex);
 
+    addSecret('signerNsecKey', nsecKey);
+    addSecret('signerPubKey', npubKey);
     notifyListeners();
   }
   void submitUserNsec() {
     var privateHex = _nip19.decode(nsecController.text);
     var publicHex = _keyGenerator.getPublicKey(privateHex['data']);
-
+    var nsecKey = _nip19.nsecEncode(privateHex['data']);
+    var npubKey = _nip19.npubEncode(publicHex);
+    addSecret('signerNsecKey', nsecKey);
+    addSecret('signerPubKey', npubKey);
     notifyListeners();
   }
 
@@ -55,6 +60,16 @@ class AppState with ChangeNotifier {
       iOptions: _getIOSOptions(),
       aOptions: _getAndroidOptions(),
     );
+    print('all length');
+    print(all.entries.length);
+    if (all.entries.isNotEmpty
+    
+    ) {
+      var test = all.entries.first;
+      print(test.key);
+      print(test.value);
+    }
+
     items = all.entries
       .map((entry) => StorageItem(entry.key, entry.value))
       .toList(growable: false);

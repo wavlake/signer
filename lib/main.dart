@@ -45,7 +45,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -55,6 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
+    bool hasKeyStored = appState.items.length > 0;
+    print('has key stored');
+    print(hasKeyStored);
     
     return Scaffold(
       appBar: AppBar(
@@ -65,11 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Please add an nsec key, or generate a new one',
             ),
             TextFormField(
               controller: appState.nsecController,
@@ -95,6 +93,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
                 return null;
               },
+            ),
+            ElevatedButton(
+              onPressed: appState.submitUserNsec,
+              child: const Text('Submit Key'),
+            ),
+            ElevatedButton(
+              onPressed: appState.generateNewNsec,
+              child: const Text('Generate Key'),
             ),
           ],
         ),
